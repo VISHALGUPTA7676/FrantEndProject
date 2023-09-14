@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import LoginPage from './components/LoginPage';
 
-function App() {
+// ...
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  
+
+  const handleLogin = ({ username, password }) => {
+    console.log(`Logging in with username: ${username} and password: ${password}`);
+    setLoggedIn(true);
+    setPassword(password); // Assuming you want to set the password on successful login
+    setUsername(username); // Assuming you want to set the username on successful login
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit Bhunesh<code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {loggedIn ? (
+
+       
+        <div>
+          <div className="container">
+      <h2>Data table</h2>
+      <table className="styled-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>E-mail</th>
+            <th>Password</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>{username}</td>
+            <td>{password}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+        </div>
+      ) : (
+        <LoginPage handleLogin={handleLogin} />
+      )}
     </div>
   );
-}
+};
 
 export default App;
