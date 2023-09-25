@@ -28,7 +28,7 @@ const Dashboard = () => {
                 <table className="styled-table">
                     <thead>
                         <tr>
-                            <th>I1D</th>
+                            <th>ID</th>
                             <th>E-mail</th>
                             <th>Password</th>
                         </tr>
