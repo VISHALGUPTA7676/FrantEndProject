@@ -1,0 +1,27 @@
+#navbarText{
+    margin-left: 22px;
+    border-left: .2px solid rgb(13, 12, 12);
+}
+
+#logoId{
+    padding-right: 2px;
+    text-decoration: none;
+}
+
+#right-side-bar{
+    padding-right: 100% ;
+}
+
+#navbarText ul li a:hover{
+    color: aqua;
+    /*text-shadow: 2px .1px #00ff62;*/
+   
+    font-weight: bold;
+
+}
+
+#navbarText ul li a{
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(241, 241, 249);
+    text-decoration: none;
+}
