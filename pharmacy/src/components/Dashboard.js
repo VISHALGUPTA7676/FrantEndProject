@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
-import Footer from './Footer';
+
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -14,6 +13,7 @@ const Dashboard = () => {
         localStorage.removeItem("user");
         navigate("/")
     }
+    
     //const userDataString = localStorage.getItem('user');
 
     // Parse the JSON string to an object
@@ -21,7 +21,7 @@ const Dashboard = () => {
     //alert(userData.id);
     return (
         <div>
-            <Header companyName="Easy Pharma" firstLink="MASTER" secondLink="TRANSACTION" thirdLink="REPORTS" forthLink="PHARMACY" fifthLink="PROFILE" />
+            
             <button onClick={logout}>LOGOUT</button>
             <div className="container">
                 <h2>Data table</h2>
@@ -42,7 +42,7 @@ const Dashboard = () => {
                     </tbody>
                 </table>
             </div>
-            <Footer/>
+           
         </div>
 
     )

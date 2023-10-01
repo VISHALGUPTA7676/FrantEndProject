@@ -1,0 +1,90 @@
+
+
+#supplierTab{
+    width: 100%;
+}
+#supplier{
+    width: 100%;
+    padding-top: 10px;
+    
+}
+
+#headingSupplier{
+    border-bottom: 2px solid black;
+    
+}
+
+
+#titalheader1{
+    padding-top: 20px;
+    padding-left: 2px;
+    border-bottom: 1px solid rgb(130, 125, 125);
+}
+#titalheader{
+    padding-top: 20px;
+    border-bottom: 1px solid black;
+}
+
+#showList{
+    padding-bottom: 10px;
+}
+#tital{
+    width: 15%;
+}
+
+.form-control{
+    width: 100%;
+}
+
+#titalheader{
+    width: 50%;
+}
+#showList button{
+    border: none;
+    height: auto;
+}
+
+#showList button:hover{
+    border: 1.5px solid gainsboro;
+}
+#tital{
+    padding-top: 22px;
+}
+#radioButton{
+    padding-top: 22px;
+}
+#actionButton{
+    padding-top: 22px;
+    text-align: center;
+    
+}
+#actionButton button{
+    margin-right: 12px;
+    width: 10vwau;
+}
+#actionButton button:hover{
+    width: 10vw;
+    border-radius: 4px;
+    background-color: aqua;
+    opacity: .6;
+    border: none;
+    border-bottom: 6px solid red;
+    font-weight: bold;
+}
+#tital1{
+    width: 15vw;
+    padding-top: 22px;
+    padding-left: 15px;
+}
+
+          
+#shown #massage{
+    text-align: center;
+    text-decoration: solid;
+    text-shadow: 1px;
+    
+    
+}
+.form-control{
+    margin-top: 22px;
+}

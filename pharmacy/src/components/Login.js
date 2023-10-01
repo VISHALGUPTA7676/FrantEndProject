@@ -15,22 +15,22 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await axios.post("http://localhost:8080/api/auth/signin", data);
-    if (res.status == 200) {
+    if (res.status === 200) {
       localStorage.setItem("user", JSON.stringify(res.data));
       navigate("/dashboard");
 
     }
   }
   useEffect(() => {
-    if (localStorage.getItem("user") != null) {
-      navigate("/dashboard")
+    if (localStorage.getItem("user") === null) {
+      navigate("/")
     }
   }, [])
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       <div>
-        {localStorage.getItem("user")}
+       
         <h2>Login Page</h2>
         <label>Username:</label>
         <input

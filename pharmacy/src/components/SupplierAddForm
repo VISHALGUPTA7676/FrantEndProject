@@ -1,0 +1,119 @@
+import React, { useState } from 'react';
+
+// Form component
+function SupplierAddForm({ onAddSupplier }) {
+  const [formData, setFormData] = useState({
+    idString: '',
+    supplierName: '',
+    supplierEmail: '',
+    supplierGstNumber: '',
+    drupLicenceNumber: '',
+    address: '',
+    open_balance: 0,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddSupplier(formData);
+    setFormData({
+      idString: '',
+      supplierName: '',
+      supplierEmail: '',
+      supplierGstNumber: '',
+      drupLicenceNumber: '',
+      address: '',
+      open_balance: 0,
+    });
+  };
+
+  return (
+    <div>
+      <h2>Add Supplier</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="idString">ID String:</label>
+          <input
+            type="text"
+            name="idString"
+            value={formData.idString}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="supplierName">Supplier Name:</label>
+          <input
+            type="text"
+            name="supplierName"
+            value={formData.supplierName}
+            onChange={handleChange}
+          />
+        </div>
+        {/* Repeat similar blocks for other fields */}
+        <div>
+          <button type="submit">Add Supplier</button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+// Table component
+function SupplierTable({ suppliers }) {
+  return (
+    <div>
+      <h2>Supplier List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID String</th>
+            <th>Supplier Name</th>
+            <th>Email</th>
+            <th>GST Number</th>
+            <th>License Number</th>
+            <th>Address</th>
+            <th>Open Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {suppliers.map((supplier, index) => (
+            <tr key={index}>
+              <td>{supplier.idString}</td>
+              <td>{supplier.supplierName}</td>
+              <td>{supplier.supplierEmail}</td>
+              <td>{supplier.supplierGstNumber}</td>
+              <td>{supplier.drupLicenceNumber}</td>
+              <td>{supplier.address}</td>
+              <td>{supplier.open_balance}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// Main App component
+function App() {
+  const [suppliers, setSuppliers] = useState([]);
+
+  const addSupplier = (supplier) => {
+    setSuppliers([...suppliers, supplier]);
+  };
+
+  return (
+    <div>
+      <SupplierForm onAddSupplier={addSupplier} />
+      <SupplierTable suppliers={suppliers} />
+    </div>
+  );
+}
+
+export default SupplierAddForm;

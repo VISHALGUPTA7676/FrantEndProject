@@ -1,0 +1,107 @@
+input{
+    width: 20%;
+    height: 30px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    outline: none;
+}
+input[type="text"]:focus{
+    border-color: #7e8283d5;
+}
+input[type="date"] {
+    padding: 0.5rem 0;
+}
+
+input[type="date"]:focus {
+    border-color: #7e8283d5;
+}
+
+input[type="date"]:focus::-webkit-calendar-picker-indicator,
+input[type="date"]:active::-webkit-calendar-picker-indicator {
+    background-color: maroon;
+    filter: invert(-1);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: maroon;
+    padding: 0.5rem;
+}
+.date::before {
+    content: attr(data-date);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: maroon;
+    padding: 0.5rem;
+}
+
+/* Set the data-date attribute to today's date in the format of dd-mm-yyyy */
+.date {
+    display: inline-block;
+}
+.date::before {
+    content: attr(data-date);
+}
+.card h5{
+    background: rgb(87, 86, 86);
+}
+.table-cell {
+    border: 1px solid black;
+    padding: 8px;
+}
+.table-cell:nth-child(1) {
+    width: 10%;
+}
+.table-cell:nth-child(2) {
+    width: 20%;
+}
+.table-cell:nth-child(3) {
+    width: 20%;
+}
+.table-cell:nth-child(4) {
+    width: 20%;
+}
+.table-cell:nth-child(5) {
+    width: 20%;
+}
+.table-cell:nth-child(6) {
+    width: 10%;
+}
+.table-cell:nth-child(7) {
+    width: 10%;
+}
+.table-cell:nth-child(8) {
+    width: 10%;
+}
+.table-cell:nth-child(9) {
+    width: 10%;
+}
+.head-cell{
+    border: 1px solid black;
+    font-size: small;
+    padding: 1px;
+}
+table{
+    padding: 2px;
+    border-collapse: collapse;
+    width: 100%;
+}
+.noneset{
+    width: 8%;
+    height: 30px;
+    background-color: #ccc;
+}
+.buttonset {
+    text-align: center;
+}
+
+.button {
+    margin: 5px;
+    border-radius: 5px;
+}
+table-head{
+    background-color: #ccc;
+}
