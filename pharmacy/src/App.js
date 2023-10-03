@@ -29,7 +29,7 @@ const App = () => {
       <div className="container-fluid">
         
         <Header companyName="Easy Pharma" firstLink="MASTER" secondLink="TRANSACTION" thirdLink="REPORTS" forthLink="PHARMACY" fifthLink="PROFILE" />
-        <div  id="MainContent">
+        <div  id="MainContent" >
         <Routes>
           
           <Route path="/" element={<Login />} />
