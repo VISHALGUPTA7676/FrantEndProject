@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../Components_css/PurchaseDetails.css";
 import axios from "axios";
+import { json } from "react-router-dom";
 
 const PurchaseDetails = () => {
 
   const [options, setOptions] = useState([]);
+  
   const userDataString = localStorage.getItem('user');
   // Parse the JSON string to an object
   const userData = JSON.parse(userDataString);
@@ -20,11 +22,7 @@ const PurchaseDetails = () => {
     }
   }, []);
 
-  const [supplierData, setSupplierData] = useState({
-    supplierName: "",
-    id: "",
-
-  });
+  const [supplierData, setSupplierData] = useState([]);
 
 
   const fillPaymentType = async () => {
@@ -41,13 +39,13 @@ const PurchaseDetails = () => {
 
       if (res.status === 200) {
         const datta = res.data;
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
         const selectOptions = datta.map(item => ({
           value: item.paymentMode,
           label: item.paymentMode
         }));
         setOptions(selectOptions);
-        console.log(selectOptions);
+        // console.log(selectOptions);
       } else {
         // Handle other response statuses (e.g., 4xx or 5xx errors)
         console.error("Request failed with status:", res.status.toUpperCase());
@@ -83,13 +81,21 @@ const PurchaseDetails = () => {
         "http://localhost:8080/pharmacy/supplier/getSupplier/" + userData.id,
         {
           headers: {
-            'Authorization':  'Bearer ' + userData.accessToken,
+            'Authorization': 'Bearer ' + userData.accessToken,
           }
         }
       );
-      if(res.status == 200){
-        alert(JSON.stringify(res.data))
+      if (res.status === 200) {
+        const data = res.data;
+        console.log(res.data)
         
+        const dada = data.map(item => ({
+          id: item.id,
+          supplierName: item.supplierName
+        }));
+        setSupplierData(dada);
+        console.log("Hi  +  " + JSON.stringify(supplierData))
+
       }
       /*if (res.status === 200) {
         const datta = res.data;
@@ -114,10 +120,12 @@ const PurchaseDetails = () => {
 
   const handleInputChangeForSupplierName = (e) => {
     const name = e.target.value;
+    alert(name)
     //alert(name.length)
     //alert(name)
     if (name.length === 3) {
-      findSupplier(name);
+      const inputValue = name.toUpperCase();
+
     }
   }
 
@@ -247,6 +255,12 @@ const PurchaseDetails = () => {
     setRoundOff(0);
   };
 
+
+  const autocompleteStyles = {
+    position: 'absolute',
+    zIndex: 1,
+    maxHeight: '200px',
+  };
   return (
     <div className="container p-2">
       <h5 className="text-muted">ADD NEW PURCHASE DETAILS</h5>
@@ -286,7 +300,14 @@ const PurchaseDetails = () => {
             />
             <br />
             <label className="my-3" >NAME</label>
-            <input className="my-3 mx-5" type="text" placeholder="Enter Supplier Name" name="supplierName" onChange={(e) => handleInputChangeForSupplierName(e)} />
+            <input className="my-3 mx-5" type="text" placeholder="Enter Supplier Name" id="autocomplete-input" onChange={(e) => handleInputChangeForSupplierName(e)}/>
+            <input type="hidden"   name="supplierName" onChange={(e) => handleInputChangeForSupplierName(e)} />
+            
+            <div className="autocomplete-list" id="autocomplete-list" style={autocompleteStyles}>
+              {/* Content for the autocomplete list */}
+             
+              
+            </div>
             <label className="my-3">BILL NO</label>
             <input className="my-3 mx-5" type="text" />
             <label className="my-3">DISC(%)</label>
@@ -295,6 +316,7 @@ const PurchaseDetails = () => {
               type="text"
               placeholder="Supplier Disc(%)"
             />
+            <input type="hidden" name="supplierId" id="supplierId" />
             <label className="my-3">FREE QTY GST</label>
             <input className="mx-1" type="checkbox" />
           </div>
@@ -330,7 +352,7 @@ const PurchaseDetails = () => {
                 {data.map((product) => (
                   <tr key={product.id}>
                     <td className="table-cell">{product.id}</td>
-                    <td className="table-cell">{product.productName}</td>
+                    <td className="table-cell"><input type="text" placeholder="enetre name" style={{ width: '100%', boxSizing: 'border-box' }} /></td>
                     <td className="table-cell">{product.hsn}</td>
                     <td className="table-cell">{product.batch}</td>
                     <td className="table-cell">{product.expDate}</td>

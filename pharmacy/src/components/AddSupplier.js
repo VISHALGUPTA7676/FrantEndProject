@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "../Components_css/Supplier.css"
 import './LoginForm.css'; // Import the CSS file
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 
 export default function AddSupplier() {
@@ -46,7 +47,7 @@ export default function AddSupplier() {
         formData,
         {
           headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJWaXNoYWxfR3VwdGEiLCJpYXQiOjE2OTU5ODY2MDMsImV4cCI6MTY5NjA3MzAwM30.8PwVzU4nTWtNWTa_lk0yfk0PEfKz3rhnbN-J9hyOr0g',
+            'Authorization':  'Bearer ' + userData.accessToken ,
           }
         }
       );
@@ -79,7 +80,7 @@ export default function AddSupplier() {
           <thead>
             <tr id="headingSupplier" >
               <th colSpan="2"><h5>ADD NEW SUPPLIER</h5></th>
-              <th colSpan="2" id="showList"><button>SHOW LIST</button></th>
+              <th colSpan="2" id="showList"><button><Link to="/supplier/showSupplier">SHOW LIST</Link></button></th>
             </tr>
             <tr>
               <th colSpan="2" id="titalheader">SUPPLIER DETAILS</th>
@@ -154,7 +155,7 @@ export default function AddSupplier() {
 
               /></td>
               <td id="tital1">STATUS</td>
-              <td id="radioButton"><input type="radio" id="html" name="status"
+              <td id="radioButton"><input type="radio" id="html" className='HelloRadioButton' name="status"
                 onChange={(e) => handleInputChange(e)} value="true" checked />
                 &nbsp;<label htmlFor="html">Enable</label> &nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="radio" id="css" value="false" name="status"

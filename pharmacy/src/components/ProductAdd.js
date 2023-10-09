@@ -27,7 +27,7 @@ const ProductAdd = () => {
         "http://localhost:8080/pharmacy/product/getCategory"+"/"+userData.id,
         {
           headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJWaXNoYWxfR3VwdGEiLCJpYXQiOjE2OTYxNDg5NDksImV4cCI6MTY5NjIzNTM0OX0.V6BQKlIE9uoVQOZA_PbgXKXVLqEi_0DvZEOl_22WAf0',
+            'Authorization':  'Bearer ' + userData.accessToken,
           }
         }
       );
@@ -58,7 +58,7 @@ const ProductAdd = () => {
         "http://localhost:8080/pharmacy/manufacturer/getManufacturer"+"/"+userData.id,
         {
           headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJWaXNoYWxfR3VwdGEiLCJpYXQiOjE2OTYxNDg5NDksImV4cCI6MTY5NjIzNTM0OX0.V6BQKlIE9uoVQOZA_PbgXKXVLqEi_0DvZEOl_22WAf0',
+            'Authorization':  'Bearer ' + userData.accessToken,
           }
         }
       );
@@ -89,7 +89,7 @@ const ProductAdd = () => {
         "http://localhost:8080/pharmacy/productGroup/getProductGroup"+"/"+userData.id,
         {
           headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJWaXNoYWxfR3VwdGEiLCJpYXQiOjE2OTYxNDg5NDksImV4cCI6MTY5NjIzNTM0OX0.V6BQKlIE9uoVQOZA_PbgXKXVLqEi_0DvZEOl_22WAf0',
+            'Authorization':  'Bearer ' + userData.accessToken,
           }
         }
       );
@@ -154,7 +154,7 @@ const ProductAdd = () => {
         formData,
         {
           headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJWaXNoYWxfR3VwdGEiLCJpYXQiOjE2OTU5ODY2MDMsImV4cCI6MTY5NjA3MzAwM30.8PwVzU4nTWtNWTa_lk0yfk0PEfKz3rhnbN-J9hyOr0g',
+            'Authorization':  'Bearer ' + userData.accessToken,
           }
         }
       );

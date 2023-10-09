@@ -36,7 +36,7 @@ export const ProductManufacturer = () => {
                 formData,
                 {
                     headers: {
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJWaXNoYWxfR3VwdGEiLCJpYXQiOjE2OTU5ODY2MDMsImV4cCI6MTY5NjA3MzAwM30.8PwVzU4nTWtNWTa_lk0yfk0PEfKz3rhnbN-J9hyOr0g',
+                        'Authorization':  'Bearer ' + userData.accessToken,
                     }
                 }
             );

@@ -12,6 +12,8 @@ import { ProductCategory } from './components/ProductCategory';
 import "./App.css";
 import { ProductManufacturer } from './components/ProductManufacturer';
 import PurchaseDetails from './components/PurchaseDetails';
+import { ShowSupplier } from './components/ShowSupplier';
+import { EditSupplier } from './components/EditSupplier';
 
 
 
@@ -40,6 +42,8 @@ const App = () => {
           <Route path='/product/productCategory' element={<ProductCategory />} />
           <Route path='/product/productManufacturer' element={<ProductManufacturer />} />
           <Route path='/purchase/addPurchase' element={<PurchaseDetails/>} />
+          <Route path='/supplier/showSupplier/' element={<ShowSupplier/>} />
+          <Route path='/supplier/editSupplier/:id' element={<EditSupplier/>} />
         </Routes>
 
         </div>
