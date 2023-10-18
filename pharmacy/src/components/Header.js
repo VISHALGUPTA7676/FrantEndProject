@@ -41,7 +41,7 @@ export default function Header(props) {
                                 MASTER
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><NavLink to='/addProduct' className="dropdown-item"  activeStyle>
+                                <li><NavLink to='/demo' className="dropdown-item"  activeStyle>
                                     ADD NEW PRODUCT
                                 </NavLink></li>
                                 <li><NavLink to='/product/addProductGroup' className="dropdown-item"  activeStyle>

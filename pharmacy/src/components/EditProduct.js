@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import "../Components_css/Supplier.css"
-import './LoginForm.css'; // Import the CSS file
+
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-const ProductAdd = () => {
+export const EditProduct = () => {
 
-  const userDataString = localStorage.getItem('user');
+    const userDataString = localStorage.getItem('user');
   // Parse the JSON string to an object
   const userData = JSON.parse(userDataString);
   const [options, setOptions] = useState([]);
   const [option1, setOption1] = useState([]);
   const [option2, setOption2] = useState([]);
+  const { id } = useParams();
   
   useEffect(() => {
+    fetchProduct();
     fillProductGroup();
     fillProductManufacturer();
     fillProductCategory();
@@ -22,6 +25,52 @@ const ProductAdd = () => {
     }
   }, [])
 
+  const fetchProduct = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8080/pharmacy/product/updateProduct/"+id+"/"+userData.id ,
+        {
+          headers: {
+            'Authorization':  'Bearer ' + userData.accessToken,
+          }
+        }
+      );
+
+
+      if (res.status === 200) {
+        const response = res.data;
+        console.log(JSON.stringify(res.data) + "!!!!!!!!!!!!!!!!!!");
+        
+        setFormData({
+    id:response.id,
+    productName:response.productName,
+    productDescription: response.productDescription,
+    productGroup: response.productGroup,
+    productCategory:response.productCategory,
+    productManufacturer: response.productManufacturer,
+    setMinProductQuantity: response.setMinProductQuantity,
+    setMaxProductQuantity: response.setMaxProductQuantity,
+    productPackaging: response.productPackaging,
+    productHSNCode: response.productHSNCode,
+    productCGST: response.productCGST,
+    productSGST: response.productSGST,
+    productStoreRackNumber: response.productStoreRackNumber,
+    productGenericCode: response.productGenericCode,
+    productStatus: response.productStatus,
+    userId: userData.id
+          });
+          
+       
+       
+      } else {
+        // Handle other response statuses (e.g., 4xx or 5xx errors)
+        console.error("Request failed with status:", res.status.toUpperCase());
+      }
+    } catch (error) {
+      // Handle network errors or exceptions here
+      console.error("An error occurred:", error);
+    }
+  }
   const fillProductCategory = async () => {
     try {
       const res = await axios.get(
@@ -126,6 +175,7 @@ const ProductAdd = () => {
 
 
   const [formData, setFormData] = useState({
+    id:"",
     productName: "",
     productDescription: "",
     productGroup: "",
@@ -150,8 +200,8 @@ const ProductAdd = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios.post(
-        "http://localhost:8080/pharmacy/product/addProduct",
+      const res = await axios.put(
+        "http://localhost:8080/pharmacy/product/updateProduct",
         formData,
         {
           headers: {
@@ -174,6 +224,7 @@ const ProductAdd = () => {
       console.error("An error occurred:", error);
     }
   }
+
 
 
 
@@ -208,6 +259,7 @@ const ProductAdd = () => {
                 type="text"
                 className="form-control"
                 name="productName"
+                value={formData.productName}
                 onChange={(e) => handleInputChange(e)}
                 required 
                 placeholder='Enter The Product Name'
@@ -216,6 +268,7 @@ const ProductAdd = () => {
               <td><input
                 type="number"
                 className="form-control"
+                value={formData.productPackaging}
                 name="productPackaging"
                 onChange={(e) => handleInputChange(e)}
                 required
@@ -232,6 +285,7 @@ const ProductAdd = () => {
                 type="text"
                 className="form-control"
                 name="productGenericCode"
+                value={formData.productGenericCode}
                 onChange={(e) => handleInputChange(e)}
                 required
 
@@ -243,6 +297,7 @@ const ProductAdd = () => {
                 type="number"
                 className="form-control"
                 name="productStoreRackNumber"
+                value={formData.productStoreRackNumber}
                 onChange={(e) => handleInputChange(e)}
                 required 
                 min={1}/></td>
@@ -251,6 +306,7 @@ const ProductAdd = () => {
                 type="text"
                 className="form-control"
                 name="productHSNCode"
+                value={formData.productHSNCode}
                 onChange={(e) => handleInputChange(e)}
                 required
               /></td>
@@ -261,6 +317,7 @@ const ProductAdd = () => {
                 type="number"
                 className="form-control"
                 name="productCGST"
+                value={formData.productCGST}
                 onChange={(e) => handleInputChange(e)}
                 required /></td>
               <td id="tital1"><b>S-GST %</b></td>
@@ -268,6 +325,7 @@ const ProductAdd = () => {
                 type="number"
                 className="form-control"
                 name="productSGST"
+                value={formData.productSGST}
                 onChange={(e) => handleInputChange(e)}
                 required
               /></td>
@@ -278,13 +336,15 @@ const ProductAdd = () => {
                 type="number"
                 className="form-control"
                 name="setMinProductQuantity"
+                value={formData.setMinProductQuantity}
                 onChange={(e) => handleInputChange(e)}
                 required /></td>
               <td id="tital1"><b>Product Max QTY</b></td>
               <td><input
                 type="number"
                 className="form-control"
-                name="productHSNCode"
+                name="setMaxProductQuantity"
+                value={formData.setMaxProductQuantity}
                 onChange={(e) => handleInputChange(e)}
                 required
               /></td>
@@ -293,7 +353,7 @@ const ProductAdd = () => {
               <td id="tital"><b>Product Category</b></td>
               <td>
 
-                <select id="cars" name="productCategory" className="form-control form-select" onChange={(e) => handleInputChange(e)}>
+                <select id="cars" name="productCategory" className="form-control form-select" value={formData.productCategory} onChange={(e) => handleInputChange(e)}>
                 <option value="" disabled selected>Select Product Category</option>
                   {option1.map(option => (
                     <option key={option.id} value={option.value}>
@@ -304,7 +364,7 @@ const ProductAdd = () => {
               </td>
               <td id="tital1"><b>Product Group</b></td>
               <td>
-                <select id="cars" name="productGroup" className="form-control form-select" onChange={(e) => handleInputChange(e)}>
+                <select id="cars" name="productGroup" className="form-control form-select" value={formData.productGroup} onChange={(e) => handleInputChange(e)}>
                 <option value="" disabled selected>Select Product Group</option>
                   {options.map(option => (
                     <option key={option.id} value={option.value}>
@@ -316,7 +376,7 @@ const ProductAdd = () => {
             </tr>
             <tr>
               <td id="tital"><b>Product Manufacturer</b></td>
-              <td><select id="cars" name="productManufacturer" className="form-control form-select" onChange={(e) => handleInputChange(e)}>
+              <td><select id="cars" name="productManufacturer" className="form-control form-select" value={formData.productManufacturer} onChange={(e) => handleInputChange(e)}>
               <option value="" disabled selected>Select Product Manufacturer</option>  
               {option2.map(name => (
                     <option key={name.id} value={name.value}>
@@ -325,16 +385,18 @@ const ProductAdd = () => {
                 ))}
               </select></td>
               <td id="tital1"><b>STATUS</b></td>
-              <td id="radioButton"><input type="radio" id="html" name="productStatus"
-                onChange={(e) => handleInputChange(e)} value="true" checked />
-                &nbsp;<label htmlFor="html">Enable</label> &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" id="css" value="false" name="productStatus"
-                  onChange={(e) => handleInputChange(e)} />
-                &nbsp;<label htmlFor="css">Disable</label>
-              </td>
+              
+                            <td id="radioButton"><input type="radio" id="html" className='HelloRadioButton' name="productStatus"
+                                onChange={(e) => handleInputChange(e)} value="true" checked={formData.productStatus === true} />
+                                &nbsp;<label htmlFor="html">Enable</label> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" id="css" value="false" name="productStatus"
+                                    onChange={(e) => handleInputChange(e)} checked={formData.productStatus === false} />
+                                &nbsp;<label htmlFor="css">Disable</label>
+                            </td>
+
             </tr>
             <tr id="submitTr">
-              <th colSpan="4" id="actionButton"><button type="submit">SUBMIT</button></th>
+              <th colSpan="4" id="actionButton"><button type="submit">UPADATE</button></th>
             </tr>
 
           </tbody>
@@ -344,5 +406,3 @@ const ProductAdd = () => {
     </div>
   )
 }
-
-export default ProductAdd

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "../Components_css/Supplier.css"
 import './LoginForm.css'; // Import the CSS file
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 export const ProductCategory = () => {
 
@@ -69,7 +70,7 @@ export const ProductCategory = () => {
                     <thead>
                         <tr id="headingSupplier" >
                             <th ><h5>ADD NEW PRODUCT CATEGORY</h5></th>
-                            <th id="showList"><button>SHOW PRODUCT CATEGORY LIST</button></th>
+                            <th id="showList"><button><Link to="/productGroup/showProductCategory">SHOW PRODUCT CATEGORY LIST</Link></button></th>
                         </tr></thead>
                     <tbody>
 

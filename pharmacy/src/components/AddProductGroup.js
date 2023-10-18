@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "../Components_css/Supplier.css"
 import './LoginForm.css'; // Import the CSS file
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 
 
@@ -72,7 +73,7 @@ export const AddProductGroup = () => {
                     <thead>
                         <tr id="headingSupplier" >
                             <th ><h5>ADD NEW PRODUCT GROUP</h5></th>
-                            <th id="showList"><button>SHOW PRODUCT GROUP LIST</button></th>
+                            <th id="showList"><button><Link to="/productGroup/showProductGroup">SHOW PRODUCT GROUP LIST</Link></button></th>
                         </tr></thead>
                     <tbody>
 

@@ -14,7 +14,15 @@ import { ProductManufacturer } from './components/ProductManufacturer';
 import PurchaseDetails from './components/PurchaseDetails';
 import { ShowSupplier } from './components/ShowSupplier';
 import { EditSupplier } from './components/EditSupplier';
-
+import ShowManufacturer from './components/ShowManufacturer';
+import { EditManufacture } from './components/EditManufacture';
+import { ShowProduct } from './components/ShowProduct';
+import { EditProduct } from './components/EditProduct';
+import { EditProductGroup } from './components/EditProductGroup';
+import { ShowProductGroup } from './components/ShowProductGroup';
+import { ShowCategory } from './components/ShowCategory';
+import { EditCategory } from './components/EditCategory';
+import ManufacturerForm from './components/ManufacturerForm';
 
 
 
@@ -44,6 +52,18 @@ const App = () => {
           <Route path='/purchase/addPurchase' element={<PurchaseDetails/>} />
           <Route path='/supplier/showSupplier/' element={<ShowSupplier/>} />
           <Route path='/supplier/editSupplier/:id' element={<EditSupplier/>} />
+          <Route path='/manufacturer/showManufacture' element={<ShowManufacturer/>} />
+          <Route path='/manufacturer/editManufacture/:id' element={<EditManufacture/>} />
+          <Route path='/product/showProduct' element={<ShowProduct/>} />
+          <Route path='/product/editProduct/:id' element={<EditProduct/>} />
+          <Route path='/productGroup/editProductGroup/:id' element={<EditProductGroup/>} />
+          <Route path='/productGroup/showProductGroup' element={<ShowProductGroup/>} />
+          <Route path='/productGroup/showProductCategory' element={<ShowCategory/>} />
+          <Route path='/productCategory/editProductCategory/:id' element={<EditCategory/>} />
+
+
+          <Route path='/demo' element={<ManufacturerForm/>} />
+
         </Routes>
 
         </div>

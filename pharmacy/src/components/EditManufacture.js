@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../Components_css/Supplier.css"
-import './LoginForm.css'; // Import the CSS file
+
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-export const ProductManufacturer = () => {
-
+export const EditManufacture = () => {
     function showMessage(message) {
         document.getElementById("massage").innerHTML = "<h5>" + message.toUpperCase() + "</h5>";
         // Set a timeout to remove the span element after 10 seconds (10000 milliseconds)
@@ -15,15 +15,61 @@ export const ProductManufacturer = () => {
         }, 5000);
     }
 
+    const { id } = useParams();
+
+    
+
     const userDataString = localStorage.getItem('user');
     // Parse the JSON string to an object
     const userData = JSON.parse(userDataString);
     const [formData, setFormData] = useState({
+        id: "",
         manufacturerName: "",
         status: true,
         userId: userData.id
 
     });
+    useEffect(() => {
+        loadManufacturer();
+        if (userData.id === null) {
+
+        }
+    }, [])
+
+    const loadManufacturer = async () => {
+        try {
+            const res = await axios.get(
+                "http://localhost:8080/pharmacy/manufacturer/getManufacturer/" + userData.id+ "/" + id,
+                {
+                    headers: {
+                        'Authorization': 'Bearer ' + userData.accessToken,
+                    }
+                }
+            );
+
+
+            if (res.status === 200) {
+                const response= res.data;
+                console.log(JSON.stringify(res.data));
+                
+                setFormData({
+                    id: response.id,
+                    manufacturerName: response.manufacturerName,
+                    status: response.status,
+                    userId: response.userId
+                });
+
+
+
+            } else {
+                // Handle other response statuses (e.g., 4xx or 5xx errors)
+                console.error("Request failed with status:", res.status.toUpperCase());
+            }
+        } catch (error) {
+            // Handle network errors or exceptions here
+            console.error("An error occurred:", error);
+        }
+    }
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
@@ -32,12 +78,12 @@ export const ProductManufacturer = () => {
         try {
             console.log(formData);
             e.preventDefault();
-            const res = await axios.post(
-                "http://localhost:8080/pharmacy/manufacturer/addManufacturer",
+            const res = await axios.put(
+                "http://localhost:8080/pharmacy/manufacturer/updateManufacturer",
                 formData,
                 {
                     headers: {
-                        'Authorization':  'Bearer ' + userData.accessToken,
+                        'Authorization': 'Bearer ' + userData.accessToken,
                     }
                 }
             );
@@ -56,6 +102,11 @@ export const ProductManufacturer = () => {
     }
 
 
+
+
+
+
+
     return (
         <div id="supplier">
             <form onSubmit={handleSubmit}>
@@ -69,7 +120,7 @@ export const ProductManufacturer = () => {
 
                     <thead>
                         <tr id="headingSupplier" >
-                            <th ><h5>ADD NEW MANUFACTURER</h5></th>
+                            <th ><h5>UPADATE MANUFACTURER</h5></th>
                             <th id="showList"><button><Link to="/manufacturer/showManufacture">SHOW MANUFACTURER LIST</Link></button></th>
                         </tr></thead>
                     <tbody>
@@ -81,9 +132,9 @@ export const ProductManufacturer = () => {
                                 type="text"
                                 className="form-control"
                                 name="manufacturerName"
+                                value={formData.manufacturerName}
                                 onChange={(e) => handleInputChange(e)}
-                                required
-                                placeholder='Enter Atleast Two Word'
+
                                 style={{ width: '30vw' }}
                             /></td>
                         </tr>
@@ -92,11 +143,11 @@ export const ProductManufacturer = () => {
                         <tr>
 
                             <td style={{ paddingLeft: '30vw', paddingRight: '11px' }} id="tital1"><b>Status</b></td>
-                            <td id="radioButton"><input type="radio" id="html" name="status"
-                                onChange={(e) => handleInputChange(e)} value="true" checked />
+                            <td id="radioButton"><input type="radio" id="html" className='HelloRadioButton' name="status"
+                                onChange={(e) => handleInputChange(e)} value="true" checked={formData.status === true} />
                                 &nbsp;<label htmlFor="html">Enable</label> &nbsp;&nbsp;&nbsp;&nbsp;
                                 <input type="radio" id="css" value="false" name="status"
-                                    onChange={(e) => handleInputChange(e)} />
+                                    onChange={(e) => handleInputChange(e)} checked={formData.status === false} />
                                 &nbsp;<label htmlFor="css">Disable</label>
                             </td>
                         </tr>

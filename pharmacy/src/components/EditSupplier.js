@@ -137,7 +137,7 @@ const loadSupplierData = async () => {
 
           <thead>
             <tr id="headingSupplier" >
-              <th colSpan="2"><h5>ADD NEW SUPPLIER</h5></th>
+              <th colSpan="2"><h5>UPADATE SUPPLIER</h5></th>
               <th colSpan="2" id="showList"><button><Link to="/supplier/showSupplier">SHOW LIST</Link></button></th>
             </tr>
             <tr>
