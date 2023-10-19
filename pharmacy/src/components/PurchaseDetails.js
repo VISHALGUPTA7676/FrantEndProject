@@ -193,6 +193,7 @@ const PurchaseDetails = () => {
         const data = res.data;
         console.log(data);
         setProduct(res.data);
+        
         console.log("Hi  +  " + JSON.stringify(product));
 
       }
