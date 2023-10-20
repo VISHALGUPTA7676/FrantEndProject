@@ -1,35 +1,97 @@
 import React, { useState } from 'react';
 
+
 const ManufacturerForm = () => {
 
-  const [inputValue, setInputValue] = useState('');
-  const [rows, setRows] = useState([]);
+  const userData = { id: 1 }; // Replace this with your actual user data or fetch it from an API
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+  const [products, setProducts] = useState([
+    {
+      productName: "",
+      productId: "",
+      productHSNCode: "",
+      productBatch: "",
+      expiryDate: "",
+      productPackaging: 0,
+      productQuantity: 0,
+      productFreeQuantity: 0,
+      productMRP: 0.0,
+      productPurchaseRate: 0.0,
+      productDiscount: 0,
+      productBaseAmount: 0.0,
+      productCGST: 0.0,
+      cGSTInAmount: 0.0,
+      productSGST: 0.0,
+      sGSTInAmount: 0.0,
+      productTotalAmtWithGST: 0.0,
+      userId: userData.id
+    }
+  ]);
+
+
+
+  
+
+  const handleInputChange = (e, index) => {
+    alert(index)
+    const { name, value } = e.target;
+    const updatedProducts = [...products];
+    updatedProducts[index] = { ...updatedProducts[index], [name]: value };
+    setProducts(updatedProducts);
+    alert("Hi  +  " + JSON.stringify(products));
   };
 
-  const handleAddRow = () => {
-    if (inputValue.trim() !== '') {
-      setRows([...rows, inputValue]);
-      setInputValue('');
-    }
+  const addProduct = () => {
+    setProducts([
+      ...products,
+      {
+        productName: "",
+        productId: "",
+        productHSNCode: "",
+        productBatch: "",
+        expiryDate: "",
+        productPackaging: 0,
+        productQuantity: 0,
+        productFreeQuantity: 0,
+        productMRP: 0.0,
+        productPurchaseRate: 0.0,
+        productDiscount: 0,
+        productBaseAmount: 0.0,
+        productCGST: 0.0,
+        cGSTInAmount: 0.0,
+        productSGST: 0.0,
+        sGSTInAmount: 0.0,
+        productTotalAmtWithGST: 0.0,
+        userId: userData.id
+      }
+    ]);
+  };
+
+  const removeProduct = (index) => {
+    const updatedProducts = [...products];
+    updatedProducts.splice(index, 1);
+    setProducts(updatedProducts);
   };
 
   return (
     <div>
-      <input type="text" value={inputValue} onChange={handleInputChange} />
-      <button onClick={handleAddRow}>Add Row</button>
-      <table>
-        <tbody>
-          {rows.map((row=1, index=1) => (
-            <tr key={index}>
-              <td>{row}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {products.map((product, index) => (
+        <div key={index}>
+          <h2>Product {index + 1}</h2>
+          <label>Product Name:</label>
+          <input
+            type="text"
+            name="productName"
+            value={product.productName}
+            onChange={(e) => handleInputChange(e, index)}
+          />
+          {/* Add other input fields for product properties */}
+          <button onClick={() => removeProduct(index)}>Remove</button>
+        </div>
+      ))}
+      <button onClick={addProduct}>Add Product</button>
     </div>
+    
   );
 };
 
