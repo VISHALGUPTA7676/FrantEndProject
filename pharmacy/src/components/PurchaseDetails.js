@@ -241,7 +241,7 @@ const PurchaseDetails = () => {
     let totalcgst = 0;
     let totalsgst = 0;
     let totalsgstInPer = 0;
-    let netTotalAmt = 0;
+    let netTotalAmt = 0.00;
 
     for (let i = 0; i < products.length; i++) {
       totalfreeQuntity = parseInt(totalfreeQuntity) + parseInt(products[i].productFreeQuantity)
@@ -265,17 +265,25 @@ const PurchaseDetails = () => {
 
 
     for (let i = 0; i < products.length; i++) {
-      netTotalAmt = parseInt(netTotalAmt) + parseInt(products[i].productTotalAmtWithGST);
+      netTotalAmt = parseFloat(netTotalAmt) + parseFloat(products[i].productTotalAmtWithGST);
     }
     document.getElementById("free").value = totalfreeQuntity.toFixed(2);
     document.getElementById("sgstamt").value = totalsgst.toFixed(2);
     document.getElementById("cgstamt").value = totalcgst.toFixed(2);
 
+
+    alert(purchaseData.discountInPercentageOnPurchase + "   --"+ netTotalAmt + "% "+ (((parseFloat(netTotalAmt)) * (parseFloat(purchaseData.discountInPercentageOnPurchase))) / 100))
+    let netpayamt1= ((parseFloat(netTotalAmt)) - ((((parseFloat(netTotalAmt)) * (parseFloat(purchaseData.discountInPercentageOnPurchase))) / 100)))
+    alert("XXXX"+ netpayamt1);
     setPurchaseData({
       ...purchaseData,
       totalCgst: totalcstInPer.toFixed(2),
       totalSgst: totalsgstInPer.toFixed(2),
-      netPurchaseAmount: netTotalAmt.toFixed(2)
+      netPurchaseAmount: netTotalAmt.toFixed(2),
+      netPayableAmount:netpayamt1.toFixed(2),
+      discountInAmountOnPurchase: (((parseFloat(netTotalAmt)) * (parseFloat(purchaseData.discountInPercentageOnPurchase))) / 100),
+      dueAmount:netpayamt1.toFixed(2)
+
     });
 
 
@@ -548,16 +556,43 @@ const PurchaseDetails = () => {
 
 
 
-  const disInPercn = (e) => {
+  const disInPaid = (e) => {
     const { name, value } = e.target;
-
-
-    let disAmt = (parseFloat(purchaseData.netPurchaseAmount) * value) / 100;
+    let values=value;
+    if(values === null || values === undefined || values === ""){
+      alert("he")
+      values=0.0;
+    }
+    alert(name +" == "+ values + "      parseFloat(purchaseData.dueAmount)" + parseFloat(purchaseData.dueAmount))
+    let minPricae= (parseFloat(purchaseData.netPayableAmount) - (parseFloat(values)));
+    alert(minPricae)
     setPurchaseData({
       ...purchaseData,
-      [name]: value,
-      discountInAmountOnPurchase: disAmt
+      paidAmount:value,
+      dueAmount: minPricae.toFixed(2)
     });
+    minPricae=0.0;
+  }
+
+
+  const disInPercn = (e) => {
+    
+    const { name, value } = e.target;
+    
+    let disAmt = (parseFloat(purchaseData.netPurchaseAmount) * value) / 100;
+    alert(disAmt)
+    let finalPurchaseAmt=(parseFloat(purchaseData.netPurchaseAmount) - disAmt);
+    let duue=finalPurchaseAmt-(parseFloat(purchaseData.paidAmount))
+    alert(finalPurchaseAmt)
+    setPurchaseData({
+      ...purchaseData,
+      discountInPercentageOnPurchase:value, 
+      discountInAmountOnPurchase: disAmt.toFixed(2),
+      netPayableAmount:finalPurchaseAmt.toFixed(2),
+      dueAmount: duue.toFixed(2)
+    });
+
+    
 
 
   };
@@ -624,7 +659,7 @@ const PurchaseDetails = () => {
 
             >
               <option value="" disabled selected>
-                Select Product Category
+                Select PAYMENT TYPE
               </option>
               {options.map((option) => (
                 <option key={option.id} value={option.value}>
@@ -695,7 +730,7 @@ const PurchaseDetails = () => {
               )}
             </div>
             <label className="my-3">BILL NO</label>
-            <input className="my-3 mx-5" type="text" name="billNumber" name="billNumber"
+            <input className="my-3 mx-5" type="text" name="billNumber" 
               onChange={(e) => handleInputChange(e)} />
             <label className="my-3">DISC(%)</label>
             <input
@@ -859,14 +894,14 @@ const PurchaseDetails = () => {
                 id="sgstamt"
               />
               <label className="my-3">DISC(%)</label>
-              <input className="my-3 mx-5  " name="discountInPercentageOnPurchase" value={purchaseData.discountInPercentageOnPurchase} onChange={(e) => disInPercn(e)} name="discountInPercentageOnPurchase" type="number" />
+              <input className="my-3 mx-5  " name="discountInPercentageOnPurchase" value={purchaseData.discountInPercentageOnPurchase} onChange={(e) => disInPercn(e)}  type="number" />
               <label className="my-3">DISC IN RS.</label>
               <input
                 className="my-3 mx-5  "
                 type="number"
                 value={purchaseData.discountInAmountOnPurchase}
                 name="discountInAmountOnPurchase"
-
+                readOnly
 
               />
               <label className="my-3">ROUND OFF</label>
@@ -882,14 +917,17 @@ const PurchaseDetails = () => {
                 className="my-3 mx-5  noneset"
                 type="number"
                 name="netPayableAmount"
-
+                
+                value={purchaseData.netPayableAmount}
               />
               <label className="my-3">PAID AMT</label>
               <input
                 className="my-3 mx-5  "
                 type="number"
                 name="paidAmount"
+                onChange={(e) => disInPaid(e)}
                 id="padi"
+                value={purchaseData.paidAmount}
 
 
               />
@@ -897,6 +935,7 @@ const PurchaseDetails = () => {
               <input
                 className="my-3 mx-5 "
                 type="number"
+                value={purchaseData.dueAmount}
                 name="dueAmount"
                 id="duei"
 
