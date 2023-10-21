@@ -34,6 +34,7 @@ const PurchaseDetails = () => {
     paidAmount: 0.0,
     dueAmount: 0.0,
     userId: userData.id,
+    
   })
 
   const handleInputChange = (e) => {
@@ -51,10 +52,10 @@ const PurchaseDetails = () => {
       ...purchaseData,
       [name]: value
     });
-    alert(JSON.stringify(purchaseData))
+    
 
     if (value === "CREDIT") {
-      alert("vaaaaa")
+      
       const myElement = document.getElementById("duei");
       const myElement1 = document.getElementById("padi");
       // Apply CSS styles using the style property
@@ -78,7 +79,7 @@ const PurchaseDetails = () => {
   const handlePurchaseDetailsChange = (e, index) => {
     const { name, value } = e.target;
     const updatedPurchaseDetails = [...purchaseData.PurchaseDetails];
-    alert(JSON.stringify(updatedPurchaseDetails + "this is forst"));
+    
     updatedPurchaseDetails[index] = {
       ...updatedPurchaseDetails[index],
       [name]: value
@@ -87,8 +88,7 @@ const PurchaseDetails = () => {
       ...purchaseData,
       PurchaseDetails: updatedPurchaseDetails
     });
-    alert(index)
-    alert(JSON.stringify(purchaseData))
+    
   };
 
 
@@ -208,18 +208,18 @@ const PurchaseDetails = () => {
 
 
 
-    alert(index + "   " + indexForList + " tyoe of index ---" + typeof (index) + " type od indexlist= " + typeof (indexForList))
+    
 
     if (index === 0) {
       setGlobalValue(indexForList + index)
-      alert(0)
+      
     }
     else if (index === 1) {
       setGlobalValue(indexForList + index)
-      alert(1)
+      
     } else {
       setGlobalValue(indexForList + 1)
-      alert(index)
+      
     }
     const updatedProducts = [...products];
     updatedProducts[index] = {
@@ -231,7 +231,7 @@ const PurchaseDetails = () => {
 
     setproductDataInput(filterProductForADD(value));
     fillGSTAndOtherFiledd()
-    alert(index + "   " + indexForList)
+    
 
   };
 
@@ -272,17 +272,17 @@ const PurchaseDetails = () => {
     document.getElementById("cgstamt").value = totalcgst.toFixed(2);
 
 
-    alert(purchaseData.discountInPercentageOnPurchase + "   --"+ netTotalAmt + "% "+ (((parseFloat(netTotalAmt)) * (parseFloat(purchaseData.discountInPercentageOnPurchase))) / 100))
-    let netpayamt1= ((parseFloat(netTotalAmt)) - ((((parseFloat(netTotalAmt)) * (parseFloat(purchaseData.discountInPercentageOnPurchase))) / 100)))
-    alert("XXXX"+ netpayamt1);
+    
+    let netpayamt1 = ((parseFloat(netTotalAmt)) - ((((parseFloat(netTotalAmt)) * (parseFloat(purchaseData.discountInPercentageOnPurchase))) / 100)))
+    
     setPurchaseData({
       ...purchaseData,
       totalCgst: totalcstInPer.toFixed(2),
       totalSgst: totalsgstInPer.toFixed(2),
       netPurchaseAmount: netTotalAmt.toFixed(2),
-      netPayableAmount:netpayamt1.toFixed(2),
+      netPayableAmount: netpayamt1.toFixed(2),
       discountInAmountOnPurchase: (((parseFloat(netTotalAmt)) * (parseFloat(purchaseData.discountInPercentageOnPurchase))) / 100),
-      dueAmount:netpayamt1.toFixed(2)
+      dueAmount: netpayamt1.toFixed(2)
 
     });
 
@@ -308,7 +308,7 @@ const PurchaseDetails = () => {
     let productRate = (rate * qnt);
     let sgstValue = ((rate * qnt) * value) / 100;
     let finalAmt = productRate + cgstValue + sgstValue;
-    alert(cgstValue)
+    
     updatedProducts[index] = {
       ...updatedProducts[index],
       cGSTInAmount: cgstValue.toFixed(2),
@@ -320,7 +320,7 @@ const PurchaseDetails = () => {
     };
     setProducts(updatedProducts)
     fillGSTAndOtherFiledd();
-    alert(event.target.name + products[index].productQuantity + "      " + value)
+    
   }
 
 
@@ -342,7 +342,7 @@ const PurchaseDetails = () => {
     let productRate = (rate * qnt);
     let sgstValue = ((rate * qnt) * sgst) / 100;
     let finalAmt = productRate + cgstValue + sgstValue;
-    alert(cgstValue)
+    
     updatedProducts[index] = {
       ...updatedProducts[index],
       cGSTInAmount: cgstValue.toFixed(2),
@@ -354,7 +354,7 @@ const PurchaseDetails = () => {
     };
     setProducts(updatedProducts)
     fillGSTAndOtherFiledd()
-    alert(event.target.name + products[index].productQuantity + "      " + value)
+    
   }
 
   const handleInputChangeproductPurchaseRate = (event, index) => {
@@ -375,7 +375,7 @@ const PurchaseDetails = () => {
     let productRate = (value * qnt);
     let sgstValue = ((value * qnt) * sgst) / 100;
     let finalAmt = productRate + cgstValue + sgstValue;
-    alert(cgstValue)
+    
     updatedProducts[index] = {
       ...updatedProducts[index],
       cGSTInAmount: cgstValue.toFixed(2),
@@ -387,7 +387,7 @@ const PurchaseDetails = () => {
     };
     setProducts(updatedProducts)
     fillGSTAndOtherFiledd()
-    alert(event.target.name + products[index].productQuantity + "      " + value)
+    
   }
 
   const handleInputChangeproductQuantity = (event, index) => {
@@ -408,7 +408,7 @@ const PurchaseDetails = () => {
     let productRate = (value * rate);
     let sgstValue = ((value * rate) * sgst) / 100;
     let finalAmt = productRate + cgstValue + sgstValue;
-    alert(cgstValue)
+    
     updatedProducts[index] = {
       ...updatedProducts[index],
       cGSTInAmount: cgstValue.toFixed(2),
@@ -420,10 +420,10 @@ const PurchaseDetails = () => {
     };
     setProducts(updatedProducts)
     fillGSTAndOtherFiledd();
-    alert(event.target.name + products[index].productQuantity + "      " + value)
+    
   }
   const handleSelectProduct = (productSelect, index) => {
-    alert(json.toString(productSelect) + " " + index + " " + typeof (index))
+    
     setSelectedproductDataInput(productSelect);
     setInputValueForProduct(productSelect.productName);
 
@@ -450,7 +450,7 @@ const PurchaseDetails = () => {
 
 
 
-    alert("Hi  +  " + JSON.stringify(products));
+    
     setproductDataInput([]);
 
   };
@@ -508,9 +508,15 @@ const PurchaseDetails = () => {
   };
 
 
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post("http://localhost:8080/pharmacy/getPurchase", purchaseData,
+    const requestData = {
+      purchase: purchaseData,
+      purchaseDetails: products, // Assuming products is your list of PurchaseDetails
+    };
+    const res = await axios.post("http://localhost:8080/pharmacy/getPurchase",requestData,
       {
         headers: {
           Authorization: "Bearer " + userData.accessToken,
@@ -551,61 +557,62 @@ const PurchaseDetails = () => {
 
   const haha = (e, index) => {
 
-    alert("Hiaaaaaa  +  " + JSON.stringify(products));
+    
   };
 
 
 
   const disInPaid = (e) => {
     const { name, value } = e.target;
-    let values=value;
-    if(values === null || values === undefined || values === ""){
-      alert("he")
-      values=0.0;
+    let values = value;
+    if (values === null || values === undefined || values === "") {
+      
+      values = 0.0;
     }
-    alert(name +" == "+ values + "      parseFloat(purchaseData.dueAmount)" + parseFloat(purchaseData.dueAmount))
-    let minPricae= (parseFloat(purchaseData.netPayableAmount) - (parseFloat(values)));
-    alert(minPricae)
+    
+    let minPricae = (parseFloat(purchaseData.netPayableAmount) - (parseFloat(values)));
+    
     setPurchaseData({
       ...purchaseData,
-      paidAmount:value,
+      paidAmount: value,
       dueAmount: minPricae.toFixed(2)
     });
-    minPricae=0.0;
+    minPricae = 0.0;
   }
 
 
   const disInPercn = (e) => {
-    
+
     const { name, value } = e.target;
-    
+
     let disAmt = (parseFloat(purchaseData.netPurchaseAmount) * value) / 100;
-    alert(disAmt)
-    let finalPurchaseAmt=(parseFloat(purchaseData.netPurchaseAmount) - disAmt);
-    let duue=finalPurchaseAmt-(parseFloat(purchaseData.paidAmount))
-    alert(finalPurchaseAmt)
+    
+    let finalPurchaseAmt = (parseFloat(purchaseData.netPurchaseAmount) - disAmt);
+    let duue = finalPurchaseAmt - (parseFloat(purchaseData.paidAmount))
+    
     setPurchaseData({
       ...purchaseData,
-      discountInPercentageOnPurchase:value, 
+      discountInPercentageOnPurchase: value,
       discountInAmountOnPurchase: disAmt.toFixed(2),
-      netPayableAmount:finalPurchaseAmt.toFixed(2),
+      netPayableAmount: finalPurchaseAmt.toFixed(2),
       dueAmount: duue.toFixed(2)
     });
 
-    
+
 
 
   };
   const handleInputChange1 = (e, index) => {
-    alert(index)
+    
     const { name, value } = e.target;
     const updatedProducts = [...products];
     updatedProducts[index] = { ...updatedProducts[index], [name]: value };
     setProducts(updatedProducts);
-    alert("Hi  +  " + JSON.stringify(products));
+    
   };
 
   const addProduct = () => {
+    fillGSTAndOtherFiledd()
     setProducts([
       ...products,
       {
@@ -636,7 +643,8 @@ const PurchaseDetails = () => {
     updatedProducts.splice(index, 1);
     setProducts(updatedProducts);
     setGlobalValue(indexForList - 1)
-    alert("Hi  +  " + JSON.stringify(inputValue))
+    fillGSTAndOtherFiledd()
+    
   };
 
   return (
@@ -730,7 +738,7 @@ const PurchaseDetails = () => {
               )}
             </div>
             <label className="my-3">BILL NO</label>
-            <input className="my-3 mx-5" type="text" name="billNumber" 
+            <input className="my-3 mx-5" type="text" name="billNumber"
               onChange={(e) => handleInputChange(e)} />
             <label className="my-3">DISC(%)</label>
             <input
@@ -884,17 +892,17 @@ const PurchaseDetails = () => {
               <label className="my-3">C.GST TOTAL</label>
               <input
                 className="my-3 mx-5  noneset"
-                type="number"
+                type="text"
                 id="cgstamt"
               />
               <label className="my-3">S.GST TOTAL</label>
               <input
                 className="my-3 mx-5  noneset"
-                type="number"
+                type="text"
                 id="sgstamt"
               />
               <label className="my-3">DISC(%)</label>
-              <input className="my-3 mx-5  " name="discountInPercentageOnPurchase" value={purchaseData.discountInPercentageOnPurchase} onChange={(e) => disInPercn(e)}  type="number" />
+              <input className="my-3 mx-5  " name="discountInPercentageOnPurchase" value={purchaseData.discountInPercentageOnPurchase} onChange={(e) => disInPercn(e)} type="number" />
               <label className="my-3">DISC IN RS.</label>
               <input
                 className="my-3 mx-5  "
@@ -917,7 +925,7 @@ const PurchaseDetails = () => {
                 className="my-3 mx-5  noneset"
                 type="number"
                 name="netPayableAmount"
-                
+
                 value={purchaseData.netPayableAmount}
               />
               <label className="my-3">PAID AMT</label>
