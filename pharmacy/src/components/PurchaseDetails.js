@@ -210,15 +210,32 @@ const PurchaseDetails = () => {
 
     
 
-    if (index === 0) {
-      setGlobalValue(indexForList + index)
+    if (index === 0 ) {
+      alert(index)
+      if(products[index].productName === ""){
+        setGlobalValue(indexForList + index)
+      }else{
+        alert("no")
+      }
+      
       
     }
     else if (index === 1) {
-      setGlobalValue(indexForList + index)
+      alert(index +" s " + indexForList)
+      
+      if(products[index].productName === ""){
+        setGlobalValue(indexForList + index)
+      }else{
+        alert("no")
+      }
       
     } else {
-      setGlobalValue(indexForList + 1)
+      if(products[index].productName === ""){
+        setGlobalValue(indexForList + 1)
+      }else{
+        alert("no")
+      }
+     
       
     }
     const updatedProducts = [...products];
@@ -244,6 +261,7 @@ const PurchaseDetails = () => {
     let netTotalAmt = 0.00;
 
     for (let i = 0; i < products.length; i++) {
+      alert(products[i].productFreeQuantity)
       totalfreeQuntity = parseInt(totalfreeQuntity) + parseInt(products[i].productFreeQuantity)
     }
     for (let i = 0; i < products.length; i++) {
@@ -427,6 +445,7 @@ const PurchaseDetails = () => {
     setSelectedproductDataInput(productSelect);
     setInputValueForProduct(productSelect.productName);
 
+    alert(index)
     const updatedProducts = [...products];
     updatedProducts[index] = {
       ...updatedProducts[index],
@@ -613,6 +632,7 @@ const PurchaseDetails = () => {
 
   const addProduct = () => {
     fillGSTAndOtherFiledd()
+    
     setProducts([
       ...products,
       {
@@ -792,15 +812,15 @@ const PurchaseDetails = () => {
                     <tr key={index}>
 
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", width: "1px", textAlign: "center", fontSize: "11px" }}><button style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px" }} onClick={() => removeProduct(index)}>-</button></td>
-                      <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input type="text" name="productName" value={product.productName} onChange={(e) => handleInputChangeForProduct(e, index)} id="autocomplete-input" style={{ width: "auto", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
+                      <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input type="text"autocomplete="off"  name="productName" value={product.productName} onChange={(e) => handleInputChangeForProduct(e, index)} id="autocomplete-input" style={{ width: "auto", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
 
 
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productHSNCode" value={product.productHSNCode} onChange={(e) => handleInputChange1(e, index)} type="text" style={{ width: "auto", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productBatch" value={product.productBatch} onChange={(e) => handleInputChange1(e, index)} type="text" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="expiryDate" placeholder="MM/YYYY" value={product.expiryDate} onChange={(e) => handleInputChange1(e, index)} type="text" style={{ width: "60px", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productPackaging" value={product.productPackaging} onChange={(e) => handleInputChange1(e, index)} type="text" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
-                      <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productQuantity" value={product.productQuantity} onChange={(e) => handleInputChangeproductQuantity(e, index)} type="text" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
-                      <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productFreeQuantity" value={product.productFreeQuantity} onChange={(e) => handleInputChange1(e, index)} type="text" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
+                      <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productQuantity" value={product.productQuantity} onChange={(e) => handleInputChangeproductQuantity(e, index)} type="number" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
+                      <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productFreeQuantity" value={product.productFreeQuantity} onChange={(e) => handleInputChange1(e, index)} type="number" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productMRP" value={product.productMRP} onChange={(e) => handleInputChange1(e, index)} type="text" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productPurchaseRate" value={product.productPurchaseRate} onChange={(e) => handleInputChangeproductPurchaseRate(e, index)} type="text" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productDiscount" value={product.productDiscount} onChange={(e) => handleInputChange1(e, index)} type="text" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
