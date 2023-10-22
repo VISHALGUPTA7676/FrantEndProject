@@ -34,7 +34,7 @@ const PurchaseDetails = () => {
     paidAmount: 0.0,
     dueAmount: 0.0,
     userId: userData.id,
-    
+
   })
 
   const handleInputChange = (e) => {
@@ -52,10 +52,10 @@ const PurchaseDetails = () => {
       ...purchaseData,
       [name]: value
     });
-    
+
 
     if (value === "CREDIT") {
-      
+
       const myElement = document.getElementById("duei");
       const myElement1 = document.getElementById("padi");
       // Apply CSS styles using the style property
@@ -79,7 +79,7 @@ const PurchaseDetails = () => {
   const handlePurchaseDetailsChange = (e, index) => {
     const { name, value } = e.target;
     const updatedPurchaseDetails = [...purchaseData.PurchaseDetails];
-    
+
     updatedPurchaseDetails[index] = {
       ...updatedPurchaseDetails[index],
       [name]: value
@@ -88,7 +88,7 @@ const PurchaseDetails = () => {
       ...purchaseData,
       PurchaseDetails: updatedPurchaseDetails
     });
-    
+
   };
 
 
@@ -208,35 +208,35 @@ const PurchaseDetails = () => {
 
 
 
-    
 
-    if (index === 0 ) {
-      alert(index)
-      if(products[index].productName === ""){
+
+    if (index === 0) {
+
+      if (products[index].productName === "") {
         setGlobalValue(indexForList + index)
-      }else{
-        alert("no")
+      } else {
+
       }
-      
-      
+
+
     }
     else if (index === 1) {
-      alert(index +" s " + indexForList)
-      
-      if(products[index].productName === ""){
+
+
+      if (products[index].productName === "") {
         setGlobalValue(indexForList + index)
-      }else{
-        alert("no")
+      } else {
+
       }
-      
+
     } else {
-      if(products[index].productName === ""){
+      if (products[index].productName === "") {
         setGlobalValue(indexForList + 1)
-      }else{
-        alert("no")
+      } else {
+
       }
-     
-      
+
+
     }
     const updatedProducts = [...products];
     updatedProducts[index] = {
@@ -248,7 +248,7 @@ const PurchaseDetails = () => {
 
     setproductDataInput(filterProductForADD(value));
     fillGSTAndOtherFiledd()
-    
+
 
   };
 
@@ -290,9 +290,9 @@ const PurchaseDetails = () => {
     document.getElementById("cgstamt").value = totalcgst.toFixed(2);
 
 
-    
+
     let netpayamt1 = ((parseFloat(netTotalAmt)) - ((((parseFloat(netTotalAmt)) * (parseFloat(purchaseData.discountInPercentageOnPurchase))) / 100)))
-    
+
     setPurchaseData({
       ...purchaseData,
       totalCgst: totalcstInPer.toFixed(2),
@@ -326,7 +326,7 @@ const PurchaseDetails = () => {
     let productRate = (rate * qnt);
     let sgstValue = ((rate * qnt) * value) / 100;
     let finalAmt = productRate + cgstValue + sgstValue;
-    
+
     updatedProducts[index] = {
       ...updatedProducts[index],
       cGSTInAmount: cgstValue.toFixed(2),
@@ -338,7 +338,7 @@ const PurchaseDetails = () => {
     };
     setProducts(updatedProducts)
     fillGSTAndOtherFiledd();
-    
+
   }
 
 
@@ -360,7 +360,7 @@ const PurchaseDetails = () => {
     let productRate = (rate * qnt);
     let sgstValue = ((rate * qnt) * sgst) / 100;
     let finalAmt = productRate + cgstValue + sgstValue;
-    
+
     updatedProducts[index] = {
       ...updatedProducts[index],
       cGSTInAmount: cgstValue.toFixed(2),
@@ -372,7 +372,7 @@ const PurchaseDetails = () => {
     };
     setProducts(updatedProducts)
     fillGSTAndOtherFiledd()
-    
+
   }
 
   const handleInputChangeproductPurchaseRate = (event, index) => {
@@ -393,7 +393,7 @@ const PurchaseDetails = () => {
     let productRate = (value * qnt);
     let sgstValue = ((value * qnt) * sgst) / 100;
     let finalAmt = productRate + cgstValue + sgstValue;
-    
+
     updatedProducts[index] = {
       ...updatedProducts[index],
       cGSTInAmount: cgstValue.toFixed(2),
@@ -405,7 +405,7 @@ const PurchaseDetails = () => {
     };
     setProducts(updatedProducts)
     fillGSTAndOtherFiledd()
-    
+
   }
 
   const handleInputChangeproductQuantity = (event, index) => {
@@ -426,7 +426,7 @@ const PurchaseDetails = () => {
     let productRate = (value * rate);
     let sgstValue = ((value * rate) * sgst) / 100;
     let finalAmt = productRate + cgstValue + sgstValue;
-    
+
     updatedProducts[index] = {
       ...updatedProducts[index],
       cGSTInAmount: cgstValue.toFixed(2),
@@ -438,14 +438,14 @@ const PurchaseDetails = () => {
     };
     setProducts(updatedProducts)
     fillGSTAndOtherFiledd();
-    
+
   }
   const handleSelectProduct = (productSelect, index) => {
-    
+
     setSelectedproductDataInput(productSelect);
     setInputValueForProduct(productSelect.productName);
 
-    alert(index)
+
     const updatedProducts = [...products];
     updatedProducts[index] = {
       ...updatedProducts[index],
@@ -469,7 +469,7 @@ const PurchaseDetails = () => {
 
 
 
-    
+
     setproductDataInput([]);
 
   };
@@ -527,7 +527,7 @@ const PurchaseDetails = () => {
   };
 
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -535,7 +535,7 @@ const PurchaseDetails = () => {
       purchase: purchaseData,
       purchaseDetails: products, // Assuming products is your list of PurchaseDetails
     };
-    const res = await axios.post("http://localhost:8080/pharmacy/getPurchase",requestData,
+    const res = await axios.post("http://localhost:8080/pharmacy/getPurchase", requestData,
       {
         headers: {
           Authorization: "Bearer " + userData.accessToken,
@@ -576,7 +576,7 @@ const PurchaseDetails = () => {
 
   const haha = (e, index) => {
 
-    
+
   };
 
 
@@ -585,12 +585,12 @@ const PurchaseDetails = () => {
     const { name, value } = e.target;
     let values = value;
     if (values === null || values === undefined || values === "") {
-      
+
       values = 0.0;
     }
-    
+
     let minPricae = (parseFloat(purchaseData.netPayableAmount) - (parseFloat(values)));
-    
+
     setPurchaseData({
       ...purchaseData,
       paidAmount: value,
@@ -605,10 +605,10 @@ const PurchaseDetails = () => {
     const { name, value } = e.target;
 
     let disAmt = (parseFloat(purchaseData.netPurchaseAmount) * value) / 100;
-    
+
     let finalPurchaseAmt = (parseFloat(purchaseData.netPurchaseAmount) - disAmt);
     let duue = finalPurchaseAmt - (parseFloat(purchaseData.paidAmount))
-    
+
     setPurchaseData({
       ...purchaseData,
       discountInPercentageOnPurchase: value,
@@ -622,17 +622,17 @@ const PurchaseDetails = () => {
 
   };
   const handleInputChange1 = (e, index) => {
-    
+
     const { name, value } = e.target;
     const updatedProducts = [...products];
     updatedProducts[index] = { ...updatedProducts[index], [name]: value };
     setProducts(updatedProducts);
-    
+
   };
 
   const addProduct = () => {
     fillGSTAndOtherFiledd()
-    
+
     setProducts([
       ...products,
       {
@@ -664,7 +664,7 @@ const PurchaseDetails = () => {
     setProducts(updatedProducts);
     setGlobalValue(indexForList - 1)
     fillGSTAndOtherFiledd()
-    
+
   };
 
   return (
@@ -812,7 +812,7 @@ const PurchaseDetails = () => {
                     <tr key={index}>
 
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", width: "1px", textAlign: "center", fontSize: "11px" }}><button style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px" }} onClick={() => removeProduct(index)}>-</button></td>
-                      <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input type="text"autocomplete="off"  name="productName" value={product.productName} onChange={(e) => handleInputChangeForProduct(e, index)} id="autocomplete-input" style={{ width: "auto", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
+                      <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input type="text" autocomplete="off" name="productName" value={product.productName} onChange={(e) => handleInputChangeForProduct(e, index)} id="autocomplete-input" style={{ width: "auto", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
 
 
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productHSNCode" value={product.productHSNCode} onChange={(e) => handleInputChange1(e, index)} type="text" style={{ width: "auto", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
