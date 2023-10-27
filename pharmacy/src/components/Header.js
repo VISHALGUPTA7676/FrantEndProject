@@ -40,7 +40,7 @@ export default function Header(props) {
                             <button className="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 MASTER
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{width:"50vw"}}>
                                 <li><NavLink to='/demo' className="dropdown-item"  activeStyle>
                                     ADD NEW PRODUCT
                                 </NavLink></li>
