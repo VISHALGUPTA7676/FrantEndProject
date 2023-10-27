@@ -59,6 +59,9 @@ export default function Header(props) {
                                 <li><NavLink to='/purchase/addPurchase' className="dropdown-item" activeStyle>
                                     Purchase
                                 </NavLink></li>
+                                <li><NavLink to='/sale/newSale' className="dropdown-item" activeStyle>
+                                    sale
+                                </NavLink></li>
                                 {/*<li><a className="dropdown-item" href="#">Another action</a></li>
                                 <li><a className="dropdown-item" href="#">Something else here</a></li>*/}
                             </ul>

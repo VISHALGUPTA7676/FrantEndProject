@@ -3,6 +3,7 @@ import "../Components_css/PurchaseDetails.css";
 import axios from "axios";
 import { json } from "react-router-dom";
 
+
 const PurchaseDetails = () => {
   const [options, setOptions] = useState([]);
 
@@ -261,7 +262,7 @@ const PurchaseDetails = () => {
     let netTotalAmt = 0.00;
 
     for (let i = 0; i < products.length; i++) {
-      alert(products[i].productFreeQuantity)
+      
       totalfreeQuntity = parseInt(totalfreeQuntity) + parseInt(products[i].productFreeQuantity)
     }
     for (let i = 0; i < products.length; i++) {
@@ -542,11 +543,14 @@ const PurchaseDetails = () => {
         },
       });
     if (res.status === 200) {
-
-
+      alert(json.toString(res.data))
+      alert(res.data)
+      showMessage(res.data);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
 
     }
-
   }
   const [products, setProducts] = useState([
     {
@@ -574,11 +578,7 @@ const PurchaseDetails = () => {
 
 
 
-  const haha = (e, index) => {
-
-
-  };
-
+  
 
 
   const disInPaid = (e) => {
@@ -667,14 +667,32 @@ const PurchaseDetails = () => {
 
   };
 
+  function showMessage(message) {
+    document.getElementById("massage").innerHTML = "<h5>" + message.toUpperCase() + "</h5>";
+    // Set a timeout to remove the span element after 10 seconds (10000 milliseconds)
+    setTimeout(function () {
+      // Remove the span element after 10 seconds
+      document.getElementById("massage").innerHTML = "";
+    }, 5000);
+  }
+
   return (
     <div className="container p-2" id="supplier">
-      <h5 className="text-muted">ADD NEW PURCHASE DETAILS</h5>
+      <div style={{display:"flex"}}>  <h5 className="text-muted">ADD NEW PURCHASE DETAILS</h5><button style={{marginLeft:"48vw"}} >SHOW PRODUCT GROUP LIST</button>  </div>
+     
 
       <form onSubmit={handleSubmit}>
+      <span style={{
+          textAlign: 'center',
+          textDecoration: 'solid',
+          color: 'red',
+          textShadow: '1px 1px 1px #000000' // Adding a color to the text shadow
+        }}><span id="massage" colSpan="1"></span></span>
+        
         <div className="card" style={{ position: "inherit" }}>
+          
           <h5 className="card-title  text-light p-1">PURCHASE DETAILS</h5>
-
+          
           <div className="card-body">
             <label className="my-2">BILL TYPE</label>
 

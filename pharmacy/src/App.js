@@ -23,6 +23,7 @@ import { ShowProductGroup } from './components/ShowProductGroup';
 import { ShowCategory } from './components/ShowCategory';
 import { EditCategory } from './components/EditCategory';
 import ManufacturerForm from './components/ManufacturerForm';
+import { Sales } from './components/Sales';
 
 
 
@@ -60,6 +61,7 @@ const App = () => {
           <Route path='/productGroup/showProductGroup' element={<ShowProductGroup/>} />
           <Route path='/productGroup/showProductCategory' element={<ShowCategory/>} />
           <Route path='/productCategory/editProductCategory/:id' element={<EditCategory/>} />
+          <Route path='/sale/newSale' element={<Sales/>} />
 
 
           <Route path='/demo' element={<ManufacturerForm/>} />
