@@ -24,6 +24,7 @@ import { ShowCategory } from './components/ShowCategory';
 import { EditCategory } from './components/EditCategory';
 import ManufacturerForm from './components/ManufacturerForm';
 import { Sales } from './components/Sales';
+import MaybeShowNavBar from './components/MaybeShowNavBar';
 
 
 
@@ -37,39 +38,42 @@ const App = () => {
 
 
     <BrowserRouter>
-      <div className="container-fluid">
-        
+      <MaybeShowNavBar>
         <Header companyName="Easy Pharma" firstLink="MASTER" secondLink="TRANSACTION" thirdLink="REPORTS" forthLink="PHARMACY" fifthLink="PROFILE" />
-        <div  id="MainContent" >
-        <Routes>
-          
-          <Route path="/" element={<Login />} />
-          <Route path='/addProduct' element={<ProductAdd />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path='/addSupplier' element={<AddSupplier />} />
-          <Route path='/product/addProductGroup' element={<AddProductGroup />} />
-          <Route path='/product/productCategory' element={<ProductCategory />} />
-          <Route path='/product/productManufacturer' element={<ProductManufacturer />} />
-          <Route path='/purchase/addPurchase' element={<PurchaseDetails/>} />
-          <Route path='/supplier/showSupplier/' element={<ShowSupplier/>} />
-          <Route path='/supplier/editSupplier/:id' element={<EditSupplier/>} />
-          <Route path='/manufacturer/showManufacture' element={<ShowManufacturer/>} />
-          <Route path='/manufacturer/editManufacture/:id' element={<EditManufacture/>} />
-          <Route path='/product/showProduct' element={<ShowProduct/>} />
-          <Route path='/product/editProduct/:id' element={<EditProduct/>} />
-          <Route path='/productGroup/editProductGroup/:id' element={<EditProductGroup/>} />
-          <Route path='/productGroup/showProductGroup' element={<ShowProductGroup/>} />
-          <Route path='/productGroup/showProductCategory' element={<ShowCategory/>} />
-          <Route path='/productCategory/editProductCategory/:id' element={<EditCategory/>} />
-          <Route path='/sale/newSale' element={<Sales/>} />
+      </MaybeShowNavBar>
+      <div className="container-fluid">
 
 
-          <Route path='/demo' element={<ManufacturerForm/>} />
+        <div id="MainContent" >
+          <Routes>
 
-        </Routes>
+            <Route path="/" element={<Login />} />
+            <Route path='/addProduct' element={<ProductAdd />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path='/addSupplier' element={<AddSupplier />} />
+            <Route path='/product/addProductGroup' element={<AddProductGroup />} />
+            <Route path='/product/productCategory' element={<ProductCategory />} />
+            <Route path='/product/productManufacturer' element={<ProductManufacturer />} />
+            <Route path='/purchase/addPurchase' element={<PurchaseDetails />} />
+            <Route path='/supplier/showSupplier/' element={<ShowSupplier />} />
+            <Route path='/supplier/editSupplier/:id' element={<EditSupplier />} />
+            <Route path='/manufacturer/showManufacture' element={<ShowManufacturer />} />
+            <Route path='/manufacturer/editManufacture/:id' element={<EditManufacture />} />
+            <Route path='/product/showProduct' element={<ShowProduct />} />
+            <Route path='/product/editProduct/:id' element={<EditProduct />} />
+            <Route path='/productGroup/editProductGroup/:id' element={<EditProductGroup />} />
+            <Route path='/productGroup/showProductGroup' element={<ShowProductGroup />} />
+            <Route path='/productGroup/showProductCategory' element={<ShowCategory />} />
+            <Route path='/productCategory/editProductCategory/:id' element={<EditCategory />} />
+            <Route path='/sale/newSale' element={<Sales />} />
+
+
+            <Route path='/demo' element={<ManufacturerForm />} />
+
+          </Routes>
 
         </div>
-        <Footer/>
+        <Footer />
 
       </div>  </BrowserRouter>
 
