@@ -495,9 +495,7 @@ const PurchaseDetails = () => {
         const data = res.data;
         console.log(data);
         setProduct(res.data);
-
         console.log("Hi  +  " + JSON.stringify(product));
-
       }
 
     } catch (error) {
@@ -543,11 +541,11 @@ const PurchaseDetails = () => {
         },
       });
     if (res.status === 200) {
-      alert(json.toString(res.data))
-      alert(res.data)
+      
+      
       showMessage(res.data);
       setTimeout(() => {
-        window.location.reload();
+        
       }, 2000);
 
     }
@@ -990,7 +988,7 @@ const PurchaseDetails = () => {
             </div>
           </div>
           <div className="buttonset">
-            <button className="m-5 button bg-dark text-light" type="submit">SUBMIT</button>
+            <button className="m-5 button bg-dark text-light" type="submit" >SUBMIT</button>
             <input
               className=" button bg-dark text-light"
               type="button"
