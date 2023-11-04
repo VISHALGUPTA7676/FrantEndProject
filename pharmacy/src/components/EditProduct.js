@@ -4,9 +4,10 @@ import "../Components_css/Supplier.css"
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const EditProduct = () => {
-
+  const navigate = useNavigate();
     const userDataString = localStorage.getItem('user');
   // Parse the JSON string to an object
   const userData = JSON.parse(userDataString);
@@ -20,9 +21,9 @@ export const EditProduct = () => {
     fillProductGroup();
     fillProductManufacturer();
     fillProductCategory();
-    if (userData.id === null) {
-
-    }
+    if (localStorage.getItem("user") == null) {
+      navigate("/")
+  }
   }, [])
 
   const fetchProduct = async () => {

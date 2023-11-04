@@ -3,9 +3,11 @@ import "../Components_css/Supplier.css"
 import './LoginForm.css'; // Import the CSS file
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 export const ProductCategory = () => {
 
+    const navigate = useNavigate();
 
     function showMessage(message) {
         document.getElementById("massage").innerHTML = "<h5>" + message.toUpperCase() + "</h5>";
@@ -25,6 +27,11 @@ export const ProductCategory = () => {
         userId: userData.id
 
     });
+    useEffect(() => {
+        if (localStorage.getItem("user") === null) {
+          navigate("/")
+        }
+      }, [])
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }

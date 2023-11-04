@@ -25,6 +25,7 @@ import { EditCategory } from './components/EditCategory';
 import ManufacturerForm from './components/ManufacturerForm';
 import { Sales } from './components/Sales';
 import MaybeShowNavBar from './components/MaybeShowNavBar';
+import { ShowPurchase } from './components/ShowPurchase';
 
 
 
@@ -32,14 +33,14 @@ import MaybeShowNavBar from './components/MaybeShowNavBar';
 
 // ...
 const App = () => {
-
+ 
 
   return (
 
 
     <BrowserRouter>
       <MaybeShowNavBar>
-        <Header companyName="Easy Pharma" firstLink="MASTER" secondLink="TRANSACTION" thirdLink="REPORTS" forthLink="PHARMACY" fifthLink="PROFILE" />
+        <Header companyName="Easy Pharma" firstLink="MASTER" secondLink="TRANSACTION" thirdLink="REPORTS"  fifthLink="PROFILE"  />
       </MaybeShowNavBar>
       <div className="container-fluid">
 
@@ -66,7 +67,7 @@ const App = () => {
             <Route path='/productGroup/showProductCategory' element={<ShowCategory />} />
             <Route path='/productCategory/editProductCategory/:id' element={<EditCategory />} />
             <Route path='/sale/newSale' element={<Sales />} />
-
+            <Route path='/purchase/showPurchase' element={<ShowPurchase />} />
 
             <Route path='/demo' element={<ManufacturerForm />} />
 

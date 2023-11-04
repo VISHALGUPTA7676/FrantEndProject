@@ -3,9 +3,10 @@ import "../Components_css/Supplier.css"
 import './LoginForm.css'; // Import the CSS file
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 export const ProductManufacturer = () => {
-
+    const navigate = useNavigate();
     function showMessage(message) {
         document.getElementById("massage").innerHTML = "<h5>" + message.toUpperCase() + "</h5>";
         // Set a timeout to remove the span element after 10 seconds (10000 milliseconds)
@@ -18,6 +19,12 @@ export const ProductManufacturer = () => {
     const userDataString = localStorage.getItem('user');
     // Parse the JSON string to an object
     const userData = JSON.parse(userDataString);
+
+    useEffect(() => {
+        if (localStorage.getItem("user") === null) {
+          navigate("/")
+        }
+      }, [])
     const [formData, setFormData] = useState({
         manufacturerName: "",
         status: true,

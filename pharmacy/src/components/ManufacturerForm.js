@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
-
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ManufacturerForm = () => {
-
+  
   const userData = { id: 1 }; // Replace this with your actual user data or fetch it from an API
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("user") === null) {
+      navigate("/")
+    }
+  }, [])
+  
   const [products, setProducts] = useState([
     {
       productName: "",

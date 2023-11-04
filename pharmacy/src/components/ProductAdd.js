@@ -3,9 +3,10 @@ import "../Components_css/Supplier.css"
 import './LoginForm.css'; // Import the CSS file
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+
 import { useNavigate } from 'react-router-dom';
 const ProductAdd = () => {
-  
+  const navigate = useNavigate();
   const userDataString = localStorage.getItem('user');
   // Parse the JSON string to an object
   const userData = JSON.parse(userDataString);
@@ -17,8 +18,8 @@ const ProductAdd = () => {
     fillProductGroup();
     fillProductManufacturer();
     fillProductCategory();
-    if (userData.id === null) {
-
+    if (localStorage.getItem("user") === null) {
+      navigate("/")
     }
   }, [])
 

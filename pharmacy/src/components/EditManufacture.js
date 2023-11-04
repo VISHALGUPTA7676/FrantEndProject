@@ -4,8 +4,10 @@ import "../Components_css/Supplier.css"
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const EditManufacture = () => {
+    const navigate = useNavigate();
     function showMessage(message) {
         document.getElementById("massage").innerHTML = "<h5>" + message.toUpperCase() + "</h5>";
         // Set a timeout to remove the span element after 10 seconds (10000 milliseconds)
@@ -31,8 +33,8 @@ export const EditManufacture = () => {
     });
     useEffect(() => {
         loadManufacturer();
-        if (userData.id === null) {
-
+        if (localStorage.getItem("user") == null) {
+            navigate("/")
         }
     }, [])
 

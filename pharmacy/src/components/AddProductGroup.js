@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../Components_css/Supplier.css"
 import './LoginForm.css'; // Import the CSS file
 import axios from 'axios'
@@ -7,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 
 export const AddProductGroup = () => {
-    
+  const navigate = useNavigate();
     
     function showMessage(message) {
         document.getElementById("massage").innerHTML = "<h5>" + message.toUpperCase() + "</h5>";
@@ -30,6 +31,11 @@ export const AddProductGroup = () => {
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
+    useEffect(() => {
+      if (localStorage.getItem("user") === null) {
+        navigate("/")
+      }
+    }, [])
 
     const handleSubmit = async (e) => {
         try {

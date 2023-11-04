@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import "../Components_css/Supplier.css"
 import "../Components_css/ShowSupplier.css"
-
+import { useNavigate } from 'react-router-dom';
 
 
 const ShowManufacturer = () => {
-
+    const navigate = useNavigate();
     const userDataString = localStorage.getItem('user');
     // Parse the JSON string to an object
     const userData = JSON.parse(userDataString);
@@ -16,9 +16,9 @@ const ShowManufacturer = () => {
     
     useEffect(() => {
        loadManufacturer();
-        if (userData.id === null) {
-
-        }
+       if (localStorage.getItem("user") === null) {
+        navigate("/")
+      }
     }, [])
 
 

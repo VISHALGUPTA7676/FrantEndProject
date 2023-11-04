@@ -2,11 +2,16 @@ import React, { useState, useEffect, useMemo } from "react";
 import "../Components_css/PurchaseDetails.css";
 import axios from "axios";
 import { json } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import "../Components_css/Supplier.css"
+import './LoginForm.css'; // Import the
 
 
 const PurchaseDetails = () => {
   const [options, setOptions] = useState([]);
-
+  const navigate = useNavigate();
   const userDataString = localStorage.getItem("user");
   // Parse the JSON string to an object
   const userData = JSON.parse(userDataString);
@@ -101,7 +106,8 @@ const PurchaseDetails = () => {
     findSupplier();
     findProduct();
 
-    if (userData.id === null) {
+    if (localStorage.getItem("user") === null) {
+      navigate("/")
     }
   }, []);
 
@@ -525,6 +531,15 @@ const PurchaseDetails = () => {
 
   };
 
+  const buttonStyle ={
+    width: "10vw",
+    borderRadius: "4px",
+    backgroundColor: "aqua",
+    opacity: ".6",
+    border: "none",
+    border: "6px solid red",
+    fontWeight: "bold",
+  }
 
 
 
@@ -676,7 +691,7 @@ const PurchaseDetails = () => {
 
   return (
     <div className="container p-2" id="supplier">
-      <div style={{display:"flex"}}>  <h5 className="text-muted">ADD NEW PURCHASE DETAILS</h5><button style={{marginLeft:"48vw"}} >SHOW PRODUCT GROUP LIST</button>  </div>
+      <div style={{display:"flex"}}>  <h5 className="text-muted">ADD NEW PURCHASE DETAILS</h5><button style={{marginLeft:"54.6vw",border:"none"}} id="showList" ><Link to="/purchase/showPurchase" id="showList" >SHOW PURCHASE DETAILS</Link></button>  </div>
      
 
       <form onSubmit={handleSubmit}>
@@ -791,7 +806,7 @@ const PurchaseDetails = () => {
         <div className="card">
           <h5 className="card-title text-light p-1">MEDICINE DETAILS</h5>
           <div className="card-body">
-            <button onClick={addProduct}>Add Product</button>
+            
             <table className="table">
 
               <thead>
@@ -839,7 +854,7 @@ const PurchaseDetails = () => {
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productFreeQuantity" value={product.productFreeQuantity} onChange={(e) => handleInputChange1(e, index)} type="number" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productMRP" value={product.productMRP} onChange={(e) => handleInputChange1(e, index)} type="text" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productPurchaseRate" value={product.productPurchaseRate} onChange={(e) => handleInputChangeproductPurchaseRate(e, index)} type="text" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
-                      <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productDiscount" value={product.productDiscount} onChange={(e) => handleInputChange1(e, index)} type="text" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
+                      <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px" }}><input name="productDiscount" value={product.productDiscount} onChange={addProduct} type="text" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", fontWeight: "bold" }} /></td>
 
                       <td className="head-cell" style={{ padding: "0px", margin: "0px", fontSize: "11px", backgroundColor: "#ccc" }}><input name="productBaseAmount" readOnly value={product.productBaseAmount} onChange={(e) => (e, index)} type="text" style={{ width: "100%", padding: "0px", fontSize: "11px", margin: "0PX", paddingLeft: "1px", backgroundColor: "#ccc", fontWeight: "bold" }} /></td>
 
@@ -987,8 +1002,10 @@ const PurchaseDetails = () => {
               />
             </div>
           </div>
-          <div className="buttonset">
-            <button className="m-5 button bg-dark text-light" type="submit" >SUBMIT</button>
+          
+        </div>
+        <div className="buttonset">
+            <input type="submit" className="m-5 button bg-dark text-light"  />
             <input
               className=" button bg-dark text-light"
               type="button"
@@ -996,7 +1013,6 @@ const PurchaseDetails = () => {
 
             />
           </div>
-        </div>
       </form>
     </div>
   );

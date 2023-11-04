@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../Components_css/Supplier.css"
 import './LoginForm.css'; // Import the CSS file
 import axios from 'axios'
@@ -7,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 export default function AddSupplier() {
 
-
+  const navigate = useNavigate();
   const userDataString = localStorage.getItem('user');
   // Parse the JSON string to an object
   const userData = JSON.parse(userDataString);
@@ -66,6 +67,11 @@ export default function AddSupplier() {
       console.error("An error occurred:", error);
     }
   }
+  useEffect(() => {
+    if (localStorage.getItem("user") === null) {
+      navigate("/")
+    }
+  }, [])
   return (
     <div id="supplier">
       <form onSubmit={handleSubmit}>

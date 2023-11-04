@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import "../Components_css/Supplier.css"
@@ -9,6 +10,7 @@ export const ShowSupplier = () => {
     // Parse the JSON string to an object
     const userData = JSON.parse(userDataString);
 
+    const navigate = useNavigate();
     const [suppliers, setSuppliers] = useState([]);
     const handleInputChange = (e) => {
         //setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -20,9 +22,9 @@ export const ShowSupplier = () => {
 
     useEffect(() => {
         loadSupplierData();
-        if (userData.id === null) {
-
-        }
+        if (localStorage.getItem("user") === null) {
+            navigate("/")
+          }
     }, [])
 
     const loadSupplierData = async () => {

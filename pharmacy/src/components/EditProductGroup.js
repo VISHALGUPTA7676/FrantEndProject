@@ -5,9 +5,10 @@ import "../Components_css/Supplier.css"
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 export const EditProductGroup = () => {
 
+    const navigate = useNavigate();
     const { id } = useParams();
       
     function showMessage(message) {
@@ -31,8 +32,8 @@ export const EditProductGroup = () => {
     });
     useEffect(() => {
         loadProductGroup();
-        if (userData.id === null) {
-
+        if (localStorage.getItem("user") == null) {
+            navigate("/")
         }
     }, [])
 

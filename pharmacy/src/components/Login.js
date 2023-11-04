@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LoginForm.css'; // Import the CSS file
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -17,14 +18,12 @@ const Login = () => {
     const res = await axios.post("http://localhost:8080/api/auth/signin", data);
     if (res.status === 200) {
       localStorage.setItem("user", JSON.stringify(res.data));
-      navigate("/dashboard");
+      navigate("/addProduct");
 
     }
   }
   useEffect(() => {
-    if (localStorage.getItem("user") === null) {
-      navigate("/")
-    }
+    
   }, [])
 
   return (

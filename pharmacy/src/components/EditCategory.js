@@ -4,108 +4,109 @@ import "../Components_css/Supplier.css"
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 export const EditCategory = () => {
 
 
-  const { id } = useParams();
-  const userData = JSON.parse(userDataString);
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const userData = JSON.parse(userDataString);
 
-  useEffect(() => {
-    loadProductCategory();
-    if (userData.id === null) {
-
-    }
-}, [])
-
-const loadProductCategory = async () => {
-  try {
-      const res = await axios.get(
-          "http://localhost:8080/pharmacy/category/showCategory/" + userData.id+ "/" + id,
-          {
-              headers: {
-                  'Authorization': 'Bearer ' + userData.accessToken,
-              }
-          }
-      );
-
-
-      if (res.status === 200) {
-          const response= res.data;
-          console.log(JSON.stringify(res.data));
-          
-          setFormData({
-              id: response.id,
-              categoryName: response.categoryName,
-              status: response.status,
-              userId: response.userId
-          });
-
-
-
-      } else {
-          // Handle other response statuses (e.g., 4xx or 5xx errors)
-          console.error("Request failed with status:", res.status.toUpperCase());
-      }
-  } catch (error) {
-      // Handle network errors or exceptions here
-      console.error("An error occurred:", error);
-  }
-}
-
-  function showMessage(message) {
-    document.getElementById("massage").innerHTML = "<h5>" + message.toUpperCase() + "</h5>";
-    // Set a timeout to remove the span element after 10 seconds (10000 milliseconds)
-    setTimeout(function () {
-        // Remove the span element after 10 seconds
-        document.getElementById("massage").innerHTML = "";
-    }, 5000);
-}
-
-const userDataString = localStorage.getItem('user');
-// Parse the JSON string to an object
-
-const [formData, setFormData] = useState({
-
-    id:"",
-    categoryName: "",
-    status: true,
-    userId: userData.id
-
-});
-const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-}
-
-const handleSubmit = async (e) => {
-    try {
-        console.log(formData);
-        e.preventDefault();
-        const res = await axios.put(
-            "http://localhost:8080/pharmacy/Category/updateCategory",
-            formData,
-            {
-                headers: {
-                    'Authorization':  'Bearer ' + userData.accessToken,
-                }
-            }
-        );
-        if (res.status === 200) {
-            console.log(res.data);
-            showMessage(res.data);
-
-        } else {
-            // Handle other response statuses (e.g., 4xx or 5xx errors)
-            console.error("Request failed with status:", res.status.toUpperCase());
+    useEffect(() => {
+        loadProductCategory();
+        if (localStorage.getItem("user") == null) {
+            navigate("/")
         }
-    } catch (error) {
-        // Handle network errors or exceptions here
-        console.error("An error occurred:", error);
-    }
-}
+    }, [])
 
-  return (
-    <div id="supplier">
+    const loadProductCategory = async () => {
+        try {
+            const res = await axios.get(
+                "http://localhost:8080/pharmacy/category/showCategory/" + userData.id + "/" + id,
+                {
+                    headers: {
+                        'Authorization': 'Bearer ' + userData.accessToken,
+                    }
+                }
+            );
+
+
+            if (res.status === 200) {
+                const response = res.data;
+                console.log(JSON.stringify(res.data));
+
+                setFormData({
+                    id: response.id,
+                    categoryName: response.categoryName,
+                    status: response.status,
+                    userId: response.userId
+                });
+
+
+
+            } else {
+                // Handle other response statuses (e.g., 4xx or 5xx errors)
+                console.error("Request failed with status:", res.status.toUpperCase());
+            }
+        } catch (error) {
+            // Handle network errors or exceptions here
+            console.error("An error occurred:", error);
+        }
+    }
+
+    function showMessage(message) {
+        document.getElementById("massage").innerHTML = "<h5>" + message.toUpperCase() + "</h5>";
+        // Set a timeout to remove the span element after 10 seconds (10000 milliseconds)
+        setTimeout(function () {
+            // Remove the span element after 10 seconds
+            document.getElementById("massage").innerHTML = "";
+        }, 5000);
+    }
+
+    const userDataString = localStorage.getItem('user');
+    // Parse the JSON string to an object
+
+    const [formData, setFormData] = useState({
+
+        id: "",
+        categoryName: "",
+        status: true,
+        userId: userData.id
+
+    });
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+    }
+
+    const handleSubmit = async (e) => {
+        try {
+            console.log(formData);
+            e.preventDefault();
+            const res = await axios.put(
+                "http://localhost:8080/pharmacy/Category/updateCategory",
+                formData,
+                {
+                    headers: {
+                        'Authorization': 'Bearer ' + userData.accessToken,
+                    }
+                }
+            );
+            if (res.status === 200) {
+                console.log(res.data);
+                showMessage(res.data);
+
+            } else {
+                // Handle other response statuses (e.g., 4xx or 5xx errors)
+                console.error("Request failed with status:", res.status.toUpperCase());
+            }
+        } catch (error) {
+            // Handle network errors or exceptions here
+            console.error("An error occurred:", error);
+        }
+    }
+
+    return (
+        <div id="supplier">
             <form onSubmit={handleSubmit}>
                 <span style={{
                     textAlign: 'center',
@@ -140,7 +141,7 @@ const handleSubmit = async (e) => {
 
                         <tr>
 
-                        <td style={{ paddingLeft: '30vw', paddingRight: '11px' }} id="tital1"><b>Status</b></td>
+                            <td style={{ paddingLeft: '30vw', paddingRight: '11px' }} id="tital1"><b>Status</b></td>
                             <td id="radioButton"><input type="radio" id="html" className='HelloRadioButton' name="status"
                                 onChange={(e) => handleInputChange(e)} value="true" checked={formData.status === true} />
                                 &nbsp;<label htmlFor="html">Enable</label> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -158,5 +159,5 @@ const handleSubmit = async (e) => {
                 </table>
             </form>
         </div>
-  )
+    )
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import "../Components_css/Supplier.css"
 import "../Components_css/ShowSupplier.css"
+import { useNavigate } from 'react-router-dom';
 
 export const ShowProduct = () => {
     const userDataString = localStorage.getItem('user');
@@ -10,12 +11,12 @@ export const ShowProduct = () => {
     const userData = JSON.parse(userDataString);
 
     const [product, setProduct] = useState([]);
-    
+    const navigate = useNavigate();
     useEffect(() => {
        loadProdcuts();
-        if (userData.id === null) {
-
-        }
+       if (localStorage.getItem("user") === null) {
+        navigate("/")
+      }
     }, [])
 
     const loadProdcuts = async () => {
